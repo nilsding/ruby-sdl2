@@ -10,8 +10,8 @@ static VALUE mChannels;
 static VALUE cGroup;
 static VALUE mMusicChannel;
 
-static VALUE playing_chunks = Qnil;
-static VALUE playing_music = Qnil;
+static VALUE playing_chunks;
+static VALUE playing_music;
 
 #define MIX_ERROR() do { HANDLE_ERROR(SDL_SetError("%s", Mix_GetError())); } while(0)
 #define HANDLE_MIX_ERROR(code) \
@@ -1194,7 +1194,9 @@ void rubysdl2_init_mixer(void)
     rb_define_module_function(mMusicChannel, "playing_music", MusicChannel_s_playing_music, 0);
 
     
+    playing_chunks = Qnil;
     rb_gc_register_address(&playing_chunks);
+    playing_music = Qnil;
     rb_gc_register_address(&playing_music);
 }
 

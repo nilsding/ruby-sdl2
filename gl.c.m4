@@ -6,7 +6,7 @@
 static VALUE mGL;
 static VALUE cGLContext;
 
-static VALUE current_context = Qnil;
+static VALUE current_context;
 
 typedef struct GLContext {
     SDL_GLContext context;
@@ -202,6 +202,7 @@ void rubysdl2_init_gl(void)
 {
     mGL = rb_define_module_under(mSDL2, "GL");
     cGLContext = rb_define_class_under(mGL, "Context", rb_cObject);
+    current_context = Qnil;
 
     rb_define_singleton_method(cGLContext, "create", GLContext_s_create, 1);
     rb_define_singleton_method(cGLContext, "current", GLContext_s_current, 0);

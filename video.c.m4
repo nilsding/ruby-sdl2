@@ -28,7 +28,7 @@ static VALUE mPackedLayout;
 
 static VALUE mScreenSaver;
 
-static VALUE hash_windowid_to_window = Qnil;
+static VALUE hash_windowid_to_window;
 
 struct Window;
 struct Renderer;
@@ -3171,7 +3171,7 @@ void rubysdl2_init_video(void)
     rb_define_module_function(mScreenSaver, "disable", ScreenSaver_disable, 0);
     rb_define_module_function(mScreenSaver, "enabled?", ScreenSaver_enabled_p, 0);
 
-
+    hash_windowid_to_window = Qnil;
     rb_gc_register_address(&hash_windowid_to_window);
     hash_windowid_to_window = rb_hash_new();
 }
