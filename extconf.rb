@@ -4,8 +4,15 @@ def add_cflags(str)
   $CFLAGS += " " + str
 end
 
-def add_libs(str)
-  $LOCAL_LIBS += " " + str
+# HACK: should probably not be needed
+if RUBY_ENGINE == "truffleruby"
+  def add_libs(str)
+    $LIBS += " " + str
+  end
+else
+  def add_libs(str)
+    $LOCAL_LIBS += " " + str
+  end
 end
 
 def run_config_program(*args)
